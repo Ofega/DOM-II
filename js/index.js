@@ -10,16 +10,17 @@
 // select
 // dblclick
 
+function addColor(el, color) {
+    TweenMax.to(el, .25, {
+        color: color,
+    })
+}
+
 /* === mouseover === */
 const navlinks = document.querySelectorAll('a.nav-link');
 navlinks.forEach(link => {
-    link.addEventListener('mouseover', function() {
-        TweenMax.to(link, .25, {
-            color: 'red',
-        })
-    })
+    link.addEventListener('mouseover', () => addColor(link, 'red'));
 })
-
 
 /* === Drag & Drop === */
 const banner = document.querySelector('.intro > img');
@@ -42,8 +43,15 @@ document.body.addEventListener('drop', e => {
     e.dataTransfer.clearData();
 });
 
-
 /* === load === */
-window.addEventListener('load', () => {
-    alert('Page is fully loaded');
-  });
+// window.addEventListener('load', () => {
+//     alert('Page is fully loaded');
+// });
+
+/* === focus === */
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach(btn => {
+    // Make div focusable :)
+    btn.setAttribute('tabIndex', 100);
+    btn.addEventListener('focus', () => addColor(btn, 'red'));
+})
