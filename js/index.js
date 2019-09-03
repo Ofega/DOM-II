@@ -43,3 +43,7 @@ document.body.addEventListener('drop', e => {
 });
 
 
+/* === load === */
+window.addEventListener('load', () => {
+    alert('Page is fully loaded');
+  });
