@@ -22,6 +22,7 @@ function changeColor() {
     })
 }
 
+
 /* === mouseover === */
 const navlinks = document.querySelectorAll('a.nav-link');
 navlinks.forEach(link => {
@@ -62,6 +63,21 @@ buttons.forEach(btn => {
     btn.addEventListener('focus', () => addColor(btn, 'red'));
 })
 
+// Hi rory, this following event listeners causes the page font and background color to flash repeatedly. I'm noting it incase it makes you uncomfortable.
+
 /* === resize === */
-// Hi rory, this causes the page font color to flash repeatedly. I'm noting it incase it makes you uncomfortable.
 window.addEventListener("resize", changeColor);
+
+/* === scroll === */
+window.addEventListener('scroll', function() {
+    pageYOffset > window.innerHeight ? 
+        document.body.style.backgroundColor = '#17A2B8' : 
+        document.body.style.backgroundColor = 'white' ;
+});
+
+/* === wheel === */
+window.addEventListener('wheel', function() {
+    pageYOffset > window.innerHeight ? 
+        document.body.style.backgroundColor = '#C0C0C0' : 
+        document.body.style.backgroundColor = 'white' ;
+});
