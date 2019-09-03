@@ -63,7 +63,8 @@ buttons.forEach(btn => {
     btn.addEventListener('focus', () => addColor(btn, 'red'));
 })
 
-// Hi rory, this following event listeners causes the page font and background color to flash repeatedly. I'm noting it incase it makes you uncomfortable.
+
+// Hi rory, the resize event listeners causes the page font color to flash repeatedly. I'm noting it incase it makes you uncomfortable.
 
 /* === resize === */
 window.addEventListener("resize", changeColor);
@@ -78,6 +79,11 @@ window.addEventListener('scroll', function() {
 /* === wheel === */
 window.addEventListener('wheel', function() {
     pageYOffset > window.innerHeight ? 
-        document.body.style.backgroundColor = '#C0C0C0' : 
-        document.body.style.backgroundColor = 'white' ;
+        document.body.style.border = '4px solid red' : 
+        document.body.style.border = 'none' ;
+});
+
+/* === dbclick === */
+document.body.addEventListener('dblclick', function() {
+    document.body.textContent = 'You clicked twice! Please refresh'
 });
