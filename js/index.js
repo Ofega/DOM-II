@@ -1,12 +1,25 @@
 // Your code goes here
 
-const navlinks = document.querySelectorAll('a.nav-link');
+const header = document.querySelector('.intro');
 const banner = document.querySelector('.intro > img');
 const headline = document.querySelector('.intro > h2');
+
 const buttons = document.querySelectorAll('.btn');
+const navlinks = document.querySelectorAll('a.nav-link');
+
+const input = document.createElement('input');
+const selectPara = document.createElement('p');
+
+input.style = 'width: 100%; padding: 1rem; border: 2px solid #000; display: block;';
+selectPara.style = 'padding: 1.5rem 1rem; border: 2px solid #000;';
+
+header.appendChild(input);
+header.appendChild(selectPara);
 
 banner.setAttribute('id', 'dragTest');
 banner.setAttribute('draggable', 'true');
+input.setAttribute('value', 'Select: Show & Tell');
+input.setAttribute('draggable', 'false');
 
 
 // Event Listeners
@@ -63,6 +76,8 @@ document.body.addEventListener('dblclick', function() {
     document.body.textContent = 'You clicked twice! Please refresh'
 });
 
+input.addEventListener('select', logSelection);
+
 
 
 
@@ -77,4 +92,9 @@ function changeOpacity() {
     TweenMax.to('body', .25, {
         opacity: '.7'
     })
+}
+
+function logSelection(e) {
+    const selection = e.target.value.substring(e.target.selectionStart, e.target.selectionEnd);
+    selectPara.textContent = `You selected: ${selection}`;
 }
