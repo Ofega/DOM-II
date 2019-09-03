@@ -16,6 +16,12 @@ function addColor(el, color) {
     })
 }
 
+function changeColor() {
+    TweenMax.to('body', .25, {
+        color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+    })
+}
+
 /* === mouseover === */
 const navlinks = document.querySelectorAll('a.nav-link');
 navlinks.forEach(link => {
@@ -55,3 +61,7 @@ buttons.forEach(btn => {
     btn.setAttribute('tabIndex', 100);
     btn.addEventListener('focus', () => addColor(btn, 'red'));
 })
+
+/* === resize === */
+// Hi rory, this causes the page font color to flash repeatedly. I'm noting it incase it makes you uncomfortable.
+window.addEventListener("resize", changeColor);
