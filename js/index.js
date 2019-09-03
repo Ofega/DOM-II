@@ -1,46 +1,27 @@
 // Your code goes here
-// mouseover
-// keydown
-// wheel
-// drag / drop
-// load
-// focus
-// resize
-// scroll
-// select
-// dblclick
 
-function addColor(el, color) {
-    TweenMax.to(el, .25, {
-        color: color,
-    })
-}
-
-function changeColor() {
-    TweenMax.to('body', .25, {
-        color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
-    })
-}
-
-
-/* === mouseover === */
 const navlinks = document.querySelectorAll('a.nav-link');
-navlinks.forEach(link => {
-    link.addEventListener('mouseover', () => addColor(link, 'red'));
-})
-
-/* === Drag & Drop === */
 const banner = document.querySelector('.intro > img');
+const headline = document.querySelector('.intro > h2');
+const buttons = document.querySelectorAll('.btn');
 
 banner.setAttribute('id', 'dragTest');
 banner.setAttribute('draggable', 'true');
 
+
+// Event Listeners
+navlinks.forEach(link => {
+    link.addEventListener('mouseover', () => addColor(link, 'red'));
+})
+
 banner.addEventListener('dragstart', e => {
     e.dataTransfer.setData('text/plain', event.target.id);
 })
+
 document.body.addEventListener('dragover', e => {
     e.preventDefault();
 });
+
 document.body.addEventListener('drop', e => {
     const id = e.dataTransfer.getData('text');
     const draggableElement = document.getElementById(id);
@@ -50,40 +31,50 @@ document.body.addEventListener('drop', e => {
     e.dataTransfer.clearData();
 });
 
-/* === load === */
 // window.addEventListener('load', () => {
 //     alert('Page is fully loaded');
 // });
 
-/* === focus === */
-const buttons = document.querySelectorAll('.btn');
 buttons.forEach(btn => {
     // Make div focusable :)
     btn.setAttribute('tabIndex', 100);
     btn.addEventListener('focus', () => addColor(btn, 'red'));
-})
+});
 
+window.addEventListener("resize", changeOpacity);
 
-// Hi rory, the resize event listeners causes the page font color to flash repeatedly. I'm noting it incase it makes you uncomfortable.
-
-/* === resize === */
-window.addEventListener("resize", changeColor);
-
-/* === scroll === */
 window.addEventListener('scroll', function() {
     pageYOffset > window.innerHeight ? 
         document.body.style.backgroundColor = '#17A2B8' : 
         document.body.style.backgroundColor = 'white' ;
 });
 
-/* === wheel === */
 window.addEventListener('wheel', function() {
     pageYOffset > window.innerHeight ? 
         document.body.style.border = '4px solid red' : 
         document.body.style.border = 'none' ;
 });
 
-/* === dbclick === */
+document.body.addEventListener('keydown', e => {
+    headline.textContent += `${e.key}`;
+});
+
 document.body.addEventListener('dblclick', function() {
     document.body.textContent = 'You clicked twice! Please refresh'
 });
+
+
+
+
+// Function
+function addColor(el, color) {
+    TweenMax.to(el, .25, {
+        color: color,
+    })
+}
+
+function changeOpacity() {
+    TweenMax.to('body', .25, {
+        opacity: '.7'
+    })
+}
